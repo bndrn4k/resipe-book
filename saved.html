@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Домашние вкусности - Сохраненные рецепты</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Amatic+SC:wght@400;700&family=Roboto+Slab:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cards.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">Домашние вкусности</a>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Поиск рецептов...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="user-actions">
+                <a href="saved.html" class="btn-icon" id="saved-recipes-btn">
+                    <i class="fas fa-bookmark"></i>
+                    <span class="badge" id="saved-count">0</span>
+                </a>
+                <button class="btn-icon" id="mobile-menu-toggle" aria-label="Открыть меню">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="categories.html?category=salads">Салаты</a></li>
+                <li><a href="categories.html?category=soups">Супы</a></li>
+                <li><a href="categories.html?category=main">Основные блюда</a></li>
+                <li><a href="categories.html?category=desserts">Десерты</a></li>
+                <li><a href="categories.html?category=drinks">Напитки</a></li>
+                <li><a href="categories.html?category=preserves">Заготовки</a></li>
+                <li><a href="categories.html?category=seasonal">Сезонное</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="container">
+        <h2 class="section-title">Мои сохраненные рецепты</h2>
+        <div class="recipes-grid" id="saved-recipes-container">
+            <!-- Сохраненные рецепты будут загружены через JavaScript -->
+        </div>
+        
+        <div id="empty-state" class="hand-drawn-border" style="display: none; text-align: center; padding: 40px;">
+            <i class="far fa-bookmark" style="font-size: 60px; color: #d9c8b6; margin-bottom: 20px;"></i>
+            <h3 style="font-family: 'Caveat', cursive; font-size: 32px; color: #8b694b;">У вас пока нет сохраненных рецептов</h3>
+            <p>Сохраняйте понравившиеся рецепты, нажимая на значок закладки</p>
+            <a href="categories.html" class="btn" style="margin-top: 20px;">Найти рецепты</a>
+        </div>
+    </section>
+
+    <div class="notification" id="notification">
+        Рецепт удален из сохраненных!
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Категории</h3>
+                    <ul>
+                        <li><a href="categories.html?category=salads">Салаты</a></li>
+                        <li><a href="categories.html?category=soups">Супы</a></li>
+                        <li><a href="categories.html?category=main">Основные блюда</a></li>
+                        <li><a href="categories.html?category=desserts">Выпечка</a></li>
+                        <li><a href="categories.html?category=preserves">Заготовки</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Сезонное</h3>
+                    <ul>
+                        <li><a href="categories.html?season=spring">Весенние рецепты</a></li>
+                        <li><a href="categories.html?season=summer">Летние рецепты</a></li>
+                        <li><a href="categories.html?season=autumn">Осенние рецепты</a></li>
+                        <li><a href="categories.html?season=winter">Зимние рецепты</a></li>
+                        <li><a href="categories.html?season=holiday">Праздничные блюда</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>О нас</h3>
+                    <p>Делимся домашними рецептами, проверенными временем и любовью.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Домашние вкусности. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/saved.js"></script>
+</body>
+</html>

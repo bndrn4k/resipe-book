@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Домашние вкусности - Детали рецепта</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Amatic+SC:wght@400;700&family=Roboto+Slab:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <style>
+    .recipe-book {
+        display: flex;
+        max-width: 1000px;
+        width: 100%;
+        background: #fff8ee;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        position: relative;
+        border: 1px solid #d9c8b6;
+        margin: 0 auto 60px;
+        animation: bookAppear 0.8s ease-out;
+    }
+    
+    /* Левая страница (фото и основная информация) */
+    .recipe-page-left {
+        flex: 1;
+        padding: 30px;
+        background: url('https://www.transparenttextures.com/patterns/old-wall.png');
+        border-right: 2px dashed #d9c8b6;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        align-items: center;
+    }
+    
+    .recipe-image {
+        height: 300px;
+        overflow: hidden;
+        border-radius: 10px;
+        border: 5px solid white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 25px;
+        width: 100%;
+    }
+    
+    .recipe-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .recipe-title {
+        font-family: 'Caveat', cursive;
+        font-size: 42px;
+        color: #5c3c16;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 10px;
+    }
+    
+    .recipe-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 3px;
+        background-color: #e7a661;
+    }
+    
+    .recipe-meta {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 25px;
+        width: 100%;
+    }
+    
+    .meta-item {
+        background: rgba(139, 105, 75, 0.1);
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        border: 1px solid #d9c8b6;
+        transition: transform 0.3s;
+    }
+    
+    .meta-item:hover {
+        transform: translateY(-3px);
+    }
+    
+    .meta-item i {
+        color: #8b694b;
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+    
+    .meta-item h3 {
+        font-family: 'Amatic SC', cursive;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #5c3c16;
+    }
+    
+    .meta-item p {
+        font-size: 16px;
+        color: #5c4c3f;
+    }
+    
+    /* Сложность рецепта */
+    .difficulty {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        margin-top: 5px;
+    }
+    
+    .difficulty dot {
+        display: block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: #d9c8b6;
+    }
+    
+    .difficulty.easy dot:nth-child(1) {
+        background-color: #8b694b;
+    }
+    
+    .difficulty.medium dot:nth-child(-n+2) {
+        background-color: #8b694b;
+    }
+    
+    .difficulty.hard dot:nth-child(-n+3) {
+        background-color: #8b694b;
+    }
+    
+    /* Приборы для приготовления */
+    .appliances {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        margin-top: 8px;
+    }
+    
+    .appliance {
+        background: rgba(231, 166, 97, 0.2);
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+        color: #8b694b;
+        border: 1px solid #e7a661;
+        font-family: 'Roboto Slab', serif;
+    }
+    
+    /* Правая страница (ингредиенты и инструкция) */
+    .recipe-page-right {
+        flex: 1;
+        padding: 30px;
+        background: url('https://www.transparenttextures.com/patterns/paper.png');
+        position: relative;
+    }
+    
+    .ingredients-section, .instructions-section {
+        margin-bottom: 30px;
+    }
+    
+.section-title {
+    font-family: 'Caveat', cursive;
+    font-size: 32px;
+    color: #5c3c16;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px;
+    text-align: center;
+    width: 100%;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background-color: #e7a661;
+}
+    
+    .ingredients-list {
+        list-style: none;
+        margin-top: 15px;
+    }
+    
+    .ingredients-list li {
+        margin-bottom: 12px;
+        padding-left: 25px;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        transition: transform 0.3s;
+        cursor: pointer;
+    }
+    
+    .ingredients-list li:hover {
+        transform: translateY(-3px);
+    }
+    
+    .ingredients-list li::before {
+        content: "•";
+        color: #e7a661;
+        font-size: 20px;
+        position: absolute;
+        left: 0;
+        top: -2px;
+    }
+    
+    .ingredient-name {
+        flex: 2;
+    }
+    
+    .ingredient-amount {
+        flex: 1;
+        text-align: right;
+        color: #8b694b;
+        font-weight: 500;
+    }
+    
+    .instructions-list {
+        list-style: none;
+        counter-reset: step-counter;
+        margin-top: 15px;
+    }
+    
+    .instructions-list li {
+        margin-bottom: 20px;
+        padding-left: 40px;
+        position: relative;
+        counter-increment: step-counter;
+        transition: transform 0.3s;
+    }
+    
+    .instructions-list li:hover {
+        transform: translateY(-3px);
+    }
+    
+    .instructions-list li::before {
+        content: counter(step-counter);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        background: #e7a661;
+        color: #5c3c16;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 16px;
+    }
+    
+    /* Декоративные элементы */
+    .book-binding {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 20px;
+        background: linear-gradient(to right, #7a5c43 0%, #5c3c16 100%);
+    }
+    
+    .book-page-edge {
+        position: absolute;
+        left: -10px;
+        top: 0;
+        bottom: 0;
+        width: 10px;
+        background: #d9c8b6;
+        border-radius: 5px 0 0 5px;
+    }
+    
+    .hand-drawn-element {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        font-family: 'Caveat', cursive;
+        color: #d9c8b6;
+        font-size: 18px;
+        transform: rotate(-10deg);
+    }
+    
+    /* Кнопка сохранения в новом стиле */
+    .save-recipe-btn-large {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 3;
+        transition: all 0.3s;
+        color: #8b694b;
+        font-size: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .save-recipe-btn-large:hover {
+        background: #fff;
+        transform: scale(1.1);
+    }
+    
+    .save-recipe-btn-large.saved {
+        color: #e7a661;
+    }
+    
+    .stamp {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        width: 80px;
+        height: 80px;
+        background-color: #e7a661;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: rotate(-15deg);
+        border: 3px solid #8b694b;
+        font-family: 'Caveat', cursive;
+        color: #5c3c16;
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 2;
+    }
+    
+    /* Стиль для кнопки "Назад" */
+    .back-button {
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 30px;
+        color: #8b694b;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s;
+        padding: 10px 20px;
+        background: rgba(139, 105, 75, 0.1);
+        border-radius: 25px;
+        border: 1px solid #d9c8b6;
+        font-family: 'Amatic SC', cursive;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    
+    .back-button:hover {
+        color: #e7a661;
+        transform: translateX(-5px);
+        background: rgba(231, 166, 97, 0.2);
+        border-color: #e7a661;
+    }
+    
+    .back-button i {
+        margin-right: 8px;
+        transition: transform 0.3s;
+    }
+    
+    .back-button:hover i {
+        transform: translateX(-3px);
+    }
+    
+    /* Анимация появления */
+    @keyframes bookAppear {
+        0% { transform: scale(0.9); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+    
+    /* Адаптивность */
+    @media (max-width: 900px) {
+        .recipe-book {
+            flex-direction: column;
+        }
+        
+        .recipe-page-left {
+            border-right: none;
+            border-bottom: 2px dashed #d9c8b6;
+        }
+        
+        .book-binding, .book-page-edge {
+            display: none;
+        }
+    }
+    
+    @media (max-width: 600px) {
+        .recipe-meta {
+            grid-template-columns: 1fr;
+        }
+        
+        .recipe-title {
+            font-size: 32px;
+        }
+        
+        .ingredients-list li {
+            flex-direction: column;
+        }
+        
+        .ingredient-amount {
+            text-align: left;
+            margin-top: 5px;
+            padding-left: 25px;
+        }
+        
+        .appliances {
+            justify-content: center;
+        }
+        
+        .appliance {
+            font-size: 12px;
+            padding: 4px 8px;
+        }
+    }
+    
+    /* Стиль для перечеркнутого текста ингредиентов */
+    .ingredients-list li.crossed-out .ingredient-name {
+        text-decoration: line-through;
+        color: #a08c7a;
+    }
+    
+    .ingredients-list li.crossed-out .ingredient-amount {
+        text-decoration: line-through;
+        color: #a08c7a;
+    }
+    
+    .ingredients-list li.crossed-out::before {
+        content: "✓";
+        color: #8b694b;
+    }
+    
+    /* Специальные стили для заголовков в ингредиентах */
+    .ingredients-list li.ingredient-header {
+        font-weight: bold;
+        cursor: default;
+        color: #5c3c16;
+        margin-top: 15px;
+        margin-bottom: 8px;
+        padding-left: 0;
+        font-family: 'Caveat', cursive;
+        font-size: 20px;
+    }
+    
+    .ingredients-list li.ingredient-header::before {
+        content: none;
+    }
+    
+    .ingredients-list li.ingredient-header:hover {
+        transform: none;
+    }
+</style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">Домашние вкусности</a>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Поиск рецептов...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="user-actions">
+                <a href="saved.html" class="btn-icon" id="saved-recipes-btn">
+                    <i class="far fa-bookmark"></i>
+                    <span class="badge" id="saved-count">0</span>
+                </a>
+                <button class="btn-icon" id="mobile-menu-toggle" aria-label="Открыть меню">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="categories.html?category=salads">Салаты</a></li>
+                <li><a href="categories.html?category=soups">Супы</a></li>
+                <li><a href="categories.html?category=main">Основные блюда</a></li>
+                <li><a href="categories.html?category=desserts">Десерты</a></li>
+                <li><a href="categories.html?category=drinks">Напитки</a></li>
+                <li><a href="categories.html?category=preserves">Заготовки</a></li>
+                <li><a href="categories.html?category=seasonal">Сезонное</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="container">
+        <a href="javascript:history.back()" class="back-button">
+            <i class="fas fa-arrow-left"></i> Назад
+        </a>
+        
+        <div class="recipe-detail" id="recipe-detail">
+            <!-- Контент рецепта  через JavaScript -->
+        </div>
+    </section>
+
+    <div class="notification" id="notification">
+        Рецепт добавлен в сохраненные!
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Категории</h3>
+                    <ul>
+                        <li><a href="categories.html?category=salads">Салаты</a></li>
+                        <li><a href="categories.html?category=soups">Супы</a></li>
+                        <li><a href="categories.html?category=main">Основные блюда</a></li>
+                        <li><a href="categories.html?category=desserts">Выпечка</a></li>
+                        <li><a href="categories.html?category=preserves">Заготовки</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Сезонное</h3>
+                    <ul>
+                        <li><a href="categories.html?season=spring">Весенние рецепты</a></li>
+                        <li><a href="categories.html?season=summer">Летние рецепты</a></li>
+                        <li><a href="categories.html?season=autumn">Осенние рецепты</a></li>
+                        <li><a href="categories.html?season=winter">Зимние рецепты</a></li>
+                        <li><a href="categories.html?season=holiday">Праздничные блюда</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>О нас</h3>
+                    <p>Делимся домашними рецептами, проверенными временем и любовью.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Домашние вкусности. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/recipe-detail.js"></script>
+</body>
+</html>
