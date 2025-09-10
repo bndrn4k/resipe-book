@@ -1,0 +1,142 @@
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.recipe-card {
+    background: #fff8ee;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #d9c8b6;
+    position: relative;
+}
+
+
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.recipe-image {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 3px solid #8b694b;
+}
+
+.recipe-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.recipe-card:hover .recipe-image img {
+    transform: scale(1.05);
+}
+
+.recipe-content {
+    padding: 20px;
+}
+
+.recipe-title {
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #5c3c16;
+}
+
+.recipe-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #8b694b;
+    border-bottom: 1px dashed #d9c8b6;
+    padding-bottom: 10px;
+}
+
+.recipe-description {
+    margin-bottom: 20px;
+    color: #5c4c3f;
+}
+
+.recipe-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.difficulty {
+    display: flex;
+    gap: 3px;
+}
+
+.difficulty dot {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #d9c8b6;
+}
+
+.difficulty.easy dot:nth-child(1) {
+    background-color: #8b694b;
+}
+
+.difficulty.medium dot:nth-child(-n+2) {
+    background-color: #8b694b;
+}
+
+.difficulty.hard dot {
+    background-color: #8b694b;
+}
+
+.read-more {
+    color: #8b694b;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s;
+    font-family: 'Amatic SC', cursive;
+    font-size: 24px;
+}
+
+.read-more:hover {
+    color: #e7a661;
+    transform: translateX(5px);
+}
+
+/* Кнопка сохранения рецепта */
+.save-recipe-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 3;
+    transition: all 0.3s;
+    color: #8b694b;
+}
+
+.save-recipe-btn:hover {
+    background: #fff;
+    transform: scale(1.1);
+}
+
+.save-recipe-btn.saved {
+    color: #e7a661;
+}
