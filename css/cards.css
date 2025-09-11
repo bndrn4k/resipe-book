@@ -15,21 +15,23 @@
     position: relative;
 }
 
-
-
 .recipe-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
 .recipe-image {
-    height: 200px;
-    overflow: hidden;
     position: relative;
+    width: 100%;
+    padding-bottom: 75%; /* Соотношение 4:3 (3/4 = 0.75) */
+    overflow: hidden;
     border-bottom: 3px solid #8b694b;
 }
 
 .recipe-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -64,6 +66,7 @@
 .recipe-description {
     margin-bottom: 20px;
     color: #5c4c3f;
+    line-height: 1.5;
 }
 
 .recipe-footer {
@@ -139,4 +142,50 @@
 
 .save-recipe-btn.saved {
     color: #e7a661;
+}
+
+/* Адаптивность для карточек */
+@media (max-width: 768px) {
+    .recipes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+    
+    .recipe-content {
+        padding: 15px;
+    }
+    
+    .recipe-title {
+        font-size: 24px;
+    }
+    
+    .recipe-meta {
+        font-size: 13px;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .read-more {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .recipes-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .recipe-image {
+        padding-bottom: 75%; /* Сохраняем соотношение 4:3 на мобильных */
+    }
+    
+    .recipe-content {
+        padding: 12px;
+    }
+    
+    .recipe-title {
+        font-size: 22px;
+    }
 }
